@@ -3,17 +3,21 @@ import java.text.SimpleDateFormat
 
 buildscript {
     repositories {
-        mavenCentral()
+//        mavenCentral()
+        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.7.+'
+        classpath 'com.android.tools.build:gradle:1.0.0'
     }
 }
 apply plugin: 'android'
 
 repositories {
-    mavenCentral()
-    mavenLocal()
+    jcenter()
+    maven { url "https://jitpack.io" }
+
+//    mavenCentral()
+//    mavenLocal()
 }
 
 
@@ -46,12 +50,12 @@ def String getVersionPatchBuild() {
 }
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.0.0"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
 
     defaultConfig {
-        minSdkVersion 4
-        targetSdkVersion 19
+        minSdkVersion 7
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0."+getVersionPatchBuild()
     }
@@ -98,19 +102,25 @@ android {
                 keyPassword key_alias_password
             }
         }
+
+
     }
 
     buildTypes {
         release {
             signingConfig signingConfigs.release
-            zipAlign true
+//            zipAlign true
 
-            runProguard false
+//            mini false
+
+            minifyEnabled true //启用Proguard
+            shrinkResources true //是否清理无用资源,依赖于minifyEnabled
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
 }
 
 dependencies {
-    compile 'net.evendanan.anysoftkeyboard:api:1.2.0@aar'
+    compile 'com.github.AnySoftKeyboard:AnySoftKeyboard-API:1.9.0'
 }

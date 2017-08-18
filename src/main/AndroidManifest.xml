@@ -12,6 +12,20 @@
     <application android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
+
+        <activity
+
+            android:name="com.anysoftkeyboard.theme.example.activity.MainActivity"
+
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+        </activity>
+
         <receiver android:exported="true" android:name=".KeyboardThemeReceiver">
             <intent-filter>
                 <action android:name="com.anysoftkeyboard.plugin.KEYBOARD_THEME" />
